@@ -5,30 +5,29 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Arunachal Pradesh</title>
+    <title>Maa Kamakhya Enterprise</title>
 
     <!-- Fonts -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700" rel='stylesheet' type='text/css'>
 
-    <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Styles -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href=" {{ asset('assets/css/jquery.datetimepicker.css') }}" rel="stylesheet">
+    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
-    <link href="{{ asset('assets/css/jquery.datetimepicker.css') }}" rel="stylesheet">
-    
     <style>
         body {
-            font-family: Consolas,monaco,monospace;
-            font-style: normal;
-            font-variant: normal;
-            font-weight: 500;
+            font-family: 'Lato';
         }
 
         .fa-btn {
             margin-right: 6px;
         }
     </style>
-    @yield('page_css_libraries')
 </head>
 <body id="app-layout">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
 
@@ -42,25 +41,34 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Arunachal Pradesh
+                    Maa Kamakhya Enterprise
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
-                @if (!Auth::guest())
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/') }}">Create New Appointment</a></li>
-                    <li><a href="{{ route('appointment.index') }}">List of Appointments</a></li>
+                    @if (!Auth::guest())
+                    <li><a href="{{ url('/') }}">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            Tender <span class="caret"></span>
+                        </a>
+
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Create New Tender</a></li>
+                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>View All Tenders</a></li>
+                        </ul>
+                    </li>
+                    @endif
                 </ul>
-                @endif
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
+                       
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -76,30 +84,22 @@
             </div>
         </div>
     </nav>
-    <div class="col-md-10">
-        <div class="content">
-            @if(Session::has('message'))
-            <div class="alert {{ Session::get('alert-class', 'alert-info') }}">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                {!! Session::get('message') !!}
-            </div>
-            @endif
-        </div>
-    </div>
+
     @yield('content')
 
     <!-- JavaScripts -->
-    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.datetimepicker.js') }}"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src=" {{ asset('assets/js/jquery.datetimepicker.js') }}"></script>
+    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+
     <script>
         $(document).ready(function(){
             $('.timepicker').datetimepicker({format:'h:i A', datepicker:false, step:10});
             $('.datepicker').datetimepicker({format:'d-m-Y', timepicker:false});
+            $('.datetimepicker').datetimepicker({format:'d-m-Y h:i A'});
         });
     </script>
 
-    @yield('page_js_libraries')
 </body>
 </html>

@@ -2,25 +2,26 @@
 	<!--=== Navigation ===-->
 	<ul id="nav">
 		<li class="current">
-			<a href="index.html">
+			<a href="{{ route('admin_dashboard') }}">
 				<i class="icon-dashboard"></i>
 				Dashboard
 			</a>
 		</li>
+
 		<li>
 			<a href="javascript:void(0);">
 				<i class="icon-desktop"></i>
-				Appointment
+				Orders
 			</a>
 			<ul class="sub-menu">
 				<li>
-					<a href="ui_general.html">
-					<i class="icon-angle-right"></i>
-					Book
+					<a href="{{ route('admin.order.create') }}">
+						<i class="icon-angle-right"></i>
+						Add New Order
 					</a>
 				</li>
 				<li>
-					<a href="ui_buttons.html">
+					<a href="{{ route('admin.order.index') }}">
 					<i class="icon-angle-right"></i>
 					View All
 					</a>
@@ -31,17 +32,17 @@
 		<li>
 			<a href="javascript:void(0);">
 				<i class="icon-desktop"></i>
-				Receptionist
+				Users
 			</a>
 			<ul class="sub-menu">
 				<li>
-					<a href="ui_general.html">
+					<a href="{{ route('user.create') }}">
 					<i class="icon-angle-right"></i>
 					Add
 					</a>
 				</li>
 				<li>
-					<a href="ui_buttons.html">
+					<a href="{{ route('user.index') }}">
 					<i class="icon-angle-right"></i>
 					View All
 					</a>

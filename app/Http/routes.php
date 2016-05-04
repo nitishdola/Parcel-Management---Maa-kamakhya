@@ -11,53 +11,92 @@
 |
 */
 
-Route::get('/admin/login','Adminauth\AuthController@showLoginForm');
-Route::post('/admin/login','Adminauth\AuthController@login');
-Route::get('/admin/password/reset','Adminauth\PasswordController@resetPassword');
-
-Route::group(['middleware' => ['admin']], function () {
+Route::group(['middleware' => ['web']], function () {
     //Login Routes...
-    Route::get('/admin/logout','Adminauth\AuthController@logout');
-	
-    // Registration Routes...
-    Route::get('admin/register', 'Adminauth\AuthController@showRegistrationForm');
-    Route::post('admin/register', 'Adminauth\AuthController@register');
+    Route::get('/admin/login','AdminAuth\AuthController@showLoginForm');
+    Route::post('/admin/login','AdminAuth\AuthController@login');
+    Route::get('/admin/logout',['uses' => 'AdminAuth\AuthController@logout', 'as' => 'admin.logout']);
 
-    Route::get('/admin', 'Admin\AdminHomeController@index');
+    // Registration Routes...
+    Route::get('admin/register', 'AdminAuth\AuthController@showRegistrationForm');
+    Route::post('admin/register', 'AdminAuth\AuthController@register');
+
+    Route::get('/admin', ['uses' => 'Admin\AdminHomeController@index', 'as' => 'admin_dashboard']);
+
+    Route::group(['prefix'=>'department'], function() {
+        Route::get('/create', [
+            'as' => 'department.create',
+            'uses' => 'DepartmentsController@create'
+        ]);
+
+        Route::get('/list-all', [
+            'as' => 'department.index',
+            'uses' => 'DepartmentsController@index'
+        ]);
+        
+        Route::post('/store', [
+            'as' => 'department.store',
+            'uses' => 'DepartmentsController@store'
+        ]);
+    });
+
+    Route::group(['prefix'=>'user'], function() {
+        Route::get('/create', [
+            'as' => 'user.create',
+            'uses' => 'UsersController@create'
+        ]);
+
+        Route::get('/list-all', [
+            'as' => 'user.index',
+            'uses' => 'UsersController@index'
+        ]);
+        
+        Route::post('/store', [
+            'as' => 'user.store',
+            'uses' => 'UsersController@store'
+        ]);
+    });
+
+    Route::group(['prefix'=>'tender'], function() {
+        Route::get('/create', [
+            'as' => 'tender.create',
+            'middleware' => ['auth'],
+            'uses' => 'TendersController@create'
+        ]);
+    });
+
+});  
+
+Route::group(['prefix'=>'admin'], function() {
+    Route::group(['prefix'=>'order'], function() {
+        Route::get('/create', [
+            'as' => 'admin.order.create',
+            'middleware' => ['admin'],
+            'uses' => 'OrdersController@adminCreate'
+        ]);
+
+        Route::post('/store', [
+            'as' => 'admin.order.store',
+            'middleware' => 'admin',
+            'uses' => 'OrdersController@admin_store'
+        ]);
+
+        Route::get('/view-all', [
+            'as' => 'admin.order.index',
+            'middleware' => 'admin',
+            'uses' => 'OrdersController@index'
+        ]);
+    });
+
 });
+
 Route::get('/', [
     'as' => 'appointment.create',
     'uses' => 'HomeController@index'
 ]);
 
-Route::group(['middleware' => ['admin', 'user']], function () {
-    
-});
-Route::post('appointment/store', [
-            'as' => 'appointment.store',
-            'uses' => 'AppointmentsController@store'
-        ]);
-Route::get('/gpass', function () {
-    return $password = bcrypt('it_arunachal');
-});
-Route::group(['middleware' => 'web'], function () {
-    Route::auth();
-	Route::get('/home', 'HomeController@index');
-});
 
-Route::group(['prefix'=>'appointment'], function() {
-    Route::get('/list-all', [
-        'as' => 'appointment.index',
-        'uses' => 'AppointmentsController@index'
-    ]);
-    
-    Route::post('/store', [
-        'as' => 'appointment.store',
-        'uses' => 'AppointmentsController@store'
-    ]);
 
-    Route::get('/view/{num}', [
-        'as' => 'appointment.view',
-        'uses' => 'AppointmentsController@view'
-    ]);
-});
+Route::auth();
+
+Route::get('/home', 'HomeController@index');

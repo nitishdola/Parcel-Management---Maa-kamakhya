@@ -3,13 +3,13 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-	<title>Dashboard | SJETA Application</title>
+	<title>Dashboard | Maa Kamakhya Enterprise Application</title>
 
 	<!--=== CSS ===-->
 
 	<!-- Bootstrap -->
 
-	<link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+	<link href="{{ asset('assets/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
 
 	<!-- jQuery UI -->
 	<!--<link href="plugins/jquery-ui/jquery-ui-1.10.2.custom.css" rel="stylesheet" type="text/css" />-->
@@ -31,13 +31,13 @@
 		<link href="assets/css/ie8.css" rel="stylesheet" type="text/css" />
 	<![endif]-->
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
-
+	<link href=" {{ asset('assets/css/jquery.datetimepicker.css') }}" rel="stylesheet">
 	<!--=== JavaScript ===-->
 
-	<script type="text/javascript" src="{{ asset('assets/js/libs/jquery-1.10.2.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/jquery/dist/jquery.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js') }}"></script>
 
-	<script type="text/javascript" src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('assets/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('assets/js/libs/lodash.compat.min.js') }}"></script>
 
 	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -91,7 +91,7 @@
 	<script type="text/javascript" src="{{ asset('assets/js/plugins.form-components.js') }}"></script>
 
 	<link href="{{ asset('assets/css/main.css') }}" rel="stylesheet" type="text/css" />
-
+	<script src=" {{ asset('assets/js/jquery.datetimepicker.js') }}"></script>
 	<style>
 		input[type="password"] {	
 			padding: 10px;
@@ -106,6 +106,10 @@
 		App.init(); // Init layout and core plugins
 		Plugins.init(); // Init all plugins
 		FormComponents.init(); // Init all form-specific plugins
+
+		$('.timepicker').datetimepicker({format:'h:i A', datepicker:false, step:10});
+        $('.datepicker').datetimepicker({format:'d-m-Y', timepicker:false});
+        $('.datetimepicker').datetimepicker({format:'d-m-Y h:i A'});
 	});
 	</script>
 

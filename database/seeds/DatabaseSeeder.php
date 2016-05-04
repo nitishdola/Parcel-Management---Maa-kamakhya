@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('admins')->insert(['username' => 'admin', 'password' => bcrypt('bvfclAdmin#')]);
+        DB::table('admins')->insert(['username' => 'admin', 'password' => bcrypt('mkAdmin#')]);
 
         $this->command->info('Admin Added !');
     }
