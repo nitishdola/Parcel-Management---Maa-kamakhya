@@ -32,7 +32,7 @@
 		<li>
 			<a href="javascript:void(0);">
 				<i class="icon-desktop"></i>
-				Users
+				Clearing Agents
 			</a>
 			<ul class="sub-menu">
 				<li>

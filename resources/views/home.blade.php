@@ -5,29 +5,44 @@
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Create New Tender</div>
+                <div class="panel-heading">View Orders</div>
+                    @if(count($orders))
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td> #</td>
+                                <td> C/No </td>
+                                <td> From </td>
+                                <td> To </td>
+                                <td> Date </td>
+                                <td> Consignor </td>
+                                <td> No of packages </td>
+                                <td> Weight </td>
+                                <td> Consignee </td>
+                                <td> Action </td>
+                            </tr>
+                        </thead>
 
-                <div class="panel-body">
-                    <div class="col-md-8">
-                        {!! Form::open(array('route' => 'tender.store', 'id' => 'tender_store', 'class' => 'form-horizontal row-border', 'files' => true)) !!}
-                        <div class="form-group {{ $errors->has('tender_type') ? 'has-error' : ''}}">
-                          {!! Form::label('department_id', 'Department *', array('class' => 'col-md-3 control-label')) !!}
-                          <div class="col-md-8">
-                            {!! Form::select('deptId', $departments, $department_id, ['class' => ' form-control required', 'id' => 'tender_type_id', 'disabled' => true, 'required' => 'true']) !!}
-                          </div>
-                          {!! $errors->first('tender_type_id', '<span class="help-inline">:message</span>') !!}
-                        </div>
-
-                        @include('tenders._create')
-                        
-                        {!! Form::hidden('department_id', $department_id) !!}
-                        <div class="form-actions">
-                            <label class="col-md-4"></label>
-                            <div class="col-md-8">{!! Form:: submit('Submit', ['class' => 'btn btn-success']) !!}</div>
-                        </div>
-                        {!!form::close()!!}
-
-                    </div>
+                        <tbody>
+                            @foreach($orders as $k => $v)
+                            <tr>
+                                <td> {{ $k+1 }} </td>
+                                <td> {{ $v->c_number }} </td>
+                                <td> {{ $v->from_city['name'] }} </td>
+                                <td> {{ $v->to_city['name'] }} </td>
+                                <td> {{ $v->date }} </td>
+                                <td> {{ $v->consignor }} </td>
+                                <td> {{ $v->no_of_packages }} </td>
+                                <td> {{ $v->weight }} </td>
+                                <td> {{ $v->consignee }} </td>
+                                <td> @if(!$v->processed)<a href="{{ route('order.process', $v->id) }} ">Dispatch</a>@else Dispatched @endif</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    @else
+                    No Orders
+                    @endif
                 </div>
             </div>
         </div>

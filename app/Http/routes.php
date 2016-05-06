@@ -86,12 +86,18 @@ Route::group(['prefix'=>'admin'], function() {
             'middleware' => 'admin',
             'uses' => 'OrdersController@index'
         ]);
+
+        Route::get('/view/{num}', [
+            'as' => 'admin.order.view',
+            'middleware' => 'admin',
+            'uses' => 'OrdersController@view'
+        ]);
     });
 
 });
 
 Route::get('/', [
-    'as' => 'appointment.create',
+    'as' => 'home',
     'uses' => 'HomeController@index'
 ]);
 
@@ -99,4 +105,32 @@ Route::get('/', [
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/home', ['as' => 'user.home', 'uses' => 'HomeController@index', 'middleware' => 'auth']);
+
+Route::group(['prefix'=>'order'], function() {
+    Route::get('/process/{num}', [
+        'as' => 'order.process',
+        'middleware' => ['auth'],
+        'uses' => 'OrdersController@process'
+    ]);
+
+    Route::get('/view-all', [
+        'as' => 'order.index',
+        'middleware' => ['auth'],
+        'uses' => 'OrdersController@view_all'
+    ]);
+
+    Route::get('/search-stock', [
+        'as' => 'stock.search',
+        'middleware' => ['auth'],
+        'uses' => 'OrdersController@stock_search'
+    ]);
+
+    Route::post('/search-stock-result', [
+        'as' => 'stock.search_result',
+        'middleware' => ['auth'],
+        'uses' => 'OrdersController@stock_search_result'
+    ]);
+
+    
+});

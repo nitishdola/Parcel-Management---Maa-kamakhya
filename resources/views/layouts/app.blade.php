@@ -52,12 +52,12 @@
                     <li><a href="{{ url('/') }}">Home</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            Tender <span class="caret"></span>
+                            Orders <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Create New Tender</a></li>
-                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>View All Tenders</a></li>
+                            <li><a href="{{ route('stock.search') }}"><i class="fa fa-btn fa-sign-out"></i>Stock Report</a></li>
+                            <li><a href="{{ route('order.index') }}"><i class="fa fa-btn fa-sign-out"></i>View All Orders</a></li>
                         </ul>
                     </li>
                     @endif

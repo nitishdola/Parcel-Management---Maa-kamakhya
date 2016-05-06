@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-use App\User, App\Department, App\DepartmentUser;
+use App\User;
 use Validator, Redirect, DB;
 
 class UsersController extends Controller
@@ -16,13 +16,11 @@ class UsersController extends Controller
    	}
 
    	public function create() {
-   		$departments 	= [''=>'Select Department'] + Department::whereStatus(1)->orderBy('name')->lists('name', 'id')->toArray();
-   		return view('master_entries.users.create', compact('departments'));
+   		return view('master_entries.users.create');
    	}
 
    	public function store(Request $request) {
      		$rules = [
-     			'department_id' => 'required|exists:departments,id',
      			'name' 		=> 'required|min:2|max:255',
   		    'username' 	=> 'required|min:2|max:255|unique:users,username,:id',
   		    'password' 	=> 'required|max:255',
@@ -39,16 +37,13 @@ class UsersController extends Controller
         $message = '';
         
         if($user->save()) {
-    			DB::table('department_users')->insert(
-    			    ['user_id' => $user->id, 'department_id' => $request->get('department_id')]
-    			);
                	$message .= 'Operator added successfully !';
     		}else{
     			$message .= 'Failed !';
     		}
 
 
-        return Redirect::route('department.index')->with('message', $message);
+        return Redirect::route('users.list_all')->with('message', $message);
     }
 
     public function index() {

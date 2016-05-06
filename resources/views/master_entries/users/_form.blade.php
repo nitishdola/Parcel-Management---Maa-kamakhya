@@ -1,11 +1,3 @@
-<div class="form-group {{ $errors->has('department_id') ? 'has-error' : ''}}">
-  {!! Form::label('department_id', 'Department', array('class' => 'col-md-2 control-label')) !!}
-  <div class="col-md-8">
-    {!! Form::select('department_id', $departments ,null, ['class' => 'form-control required', 'id' => 'department_id','required' => 'true']) !!}
-  </div>
-  {!! $errors->first('department_id', '<span class="help-inline">:message</span>') !!}
-</div>
-
 <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
   {!! Form::label('name', 'Name', array('class' => 'col-md-2 control-label')) !!}
   <div class="col-md-8">
