@@ -1,13 +1,12 @@
-@extends('layouts.app')	
+@extends('admin.layouts.default')	
 @section('content')
+<h3>Update Loading Info @Patna</h3>
+
 <div class="col-md-8">
 	<div class="widget box">
-		<div class="widget-header">
-			<h3>Search Stock</h3>
-		</div>
 		<div class="widget-content">
-			{!! Form::open(array('route' => 'stock.search_result', 'id' => 'stock.search_result', 'class' => 'form-horizontal row-border')) !!}
-				@include('orders._stock_search')
+			{!! Form::open(array('route' => 'admin.loading.store', 'id' => 'loading_store', 'class' => 'form-horizontal row-border')) !!}
+				@include('admin.loading_infos._form')
 			<div class="form-actions">
 			    {!! Form:: submit('Submit', ['class' => 'btn btn-success']) !!}
 			</div>

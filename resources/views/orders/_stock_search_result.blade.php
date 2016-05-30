@@ -19,6 +19,8 @@
 
 <br><br>
 <h4> Stock In </h4>
+
+@if(count($stock_ins))
 <table class="table">
 	<thead>
 		<tr>
@@ -44,9 +46,18 @@
 		@endforeach
 	</tbody>
 </table>
+@else
+<div class="alert alert-warning">
+  <strong>oops !</strong> No stocks found
+</div>
 
+@endif
 <br><br>
+
+
+
 <h4> Stock Out </h4>
+@if(count($stock_outs))
 <table class="table">
 	<thead>
 		<tr>
@@ -74,3 +85,9 @@
 		@endforeach
 	</tbody>
 </table>
+@else
+<div class="alert alert-warning">
+  <strong>oops !</strong> No stocks found
+</div>
+
+@endif

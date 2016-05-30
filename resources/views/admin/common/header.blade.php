@@ -8,7 +8,7 @@
 
 			<!-- Logo -->
 			<a class="navbar-brand" href="index.html">
-				<strong>BVFCL</strong>
+				<strong>Maa Kamakhya</strong>
 			</a>
 			<!-- /logo -->
 

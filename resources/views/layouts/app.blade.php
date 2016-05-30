@@ -52,12 +52,14 @@
                     <li><a href="{{ url('/') }}">Home</a></li>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            Orders <span class="caret"></span>
+                            Parcel <span class="caret"></span>
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ route('stock.search') }}"><i class="fa fa-btn fa-sign-out"></i>Stock Report</a></li>
-                            <li><a href="{{ route('order.index') }}"><i class="fa fa-btn fa-sign-out"></i>View All Orders</a></li>
+                            <li><a href="{{ route('order.receive') }}"><i class="fa fa-btn fa-sign-out"></i>Receive Parcel</a></li>
+                            <li><a href="{{ route('order.dispatch') }}"><i class="fa fa-btn fa-sign-out"></i>Dispatch Parcel</a></li>
+                            <li><a href="{{ route('stock.search') }}"><i class="fa fa-btn fa-sign-out"></i>Parcel Stock Report</a></li>
+                            <li><a href="{{ route('order.index') }}"><i class="fa fa-btn fa-sign-out"></i>View All Parcels</a></li>
                         </ul>
                     </li>
                     @endif
@@ -84,8 +86,23 @@
             </div>
         </div>
     </nav>
-
-    @yield('content')
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                @if(Session::has('message'))
+                <div class="alert {{ Session::get('alert-class', 'alert-info') }}">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {!! Session::get('message') !!}
+                </div>
+                @endif
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            @yield('content')
+        </div>
+    </div>
 
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

@@ -1,4 +1,4 @@
-@extends('admin.layouts.default')	
+@extends('layouts.app')	
 @section('content')
 <div class="col-md-10">
 	<div class="widget box">

@@ -29,6 +29,35 @@
 			</ul>
 		</li>
 
+
+		<li>
+			<a href="javascript:void(0);">
+				<i class="icon-desktop"></i>
+				Update Loading Info
+			</a>
+			<ul class="sub-menu">
+				<li>
+					<a href="{{ route('admin.loading.create') }}">
+						<i class="icon-angle-right"></i>
+						Add
+					</a>
+				</li>
+				<li>
+					<a href="{{ route('admin.order.index') }}">
+					<i class="icon-angle-right"></i>
+					View All
+					</a>
+				</li>
+			</ul>
+		</li>
+
+		<li>
+			<a href="{{ route('admin.order.create') }}">
+				<i class="icon-angle-right"></i>
+				Add Refund
+			</a>
+		</li>
+
 		<li>
 			<a href="javascript:void(0);">
 				<i class="icon-desktop"></i>

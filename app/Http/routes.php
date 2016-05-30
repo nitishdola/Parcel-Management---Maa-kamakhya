@@ -92,6 +92,44 @@ Route::group(['prefix'=>'admin'], function() {
             'middleware' => 'admin',
             'uses' => 'OrdersController@view'
         ]);
+
+        Route::get('/add-refund', [
+            'as' => 'admin.order.add_refund',
+            'middleware' => 'admin',
+            'uses' => 'OrdersController@add_refund'
+        ]);
+
+        Route::post('/add-refund', [
+            'as' => 'admin.order.post_refund',
+            'middleware' => 'admin',
+            'uses' => 'OrdersController@post_refund'
+        ]);
+    });
+
+    Route::group(['prefix'=>'loading-info'], function() {
+        Route::get('/create', [
+            'as' => 'admin.loading.create',
+            'middleware' => ['admin'],
+            'uses' => 'LoadingInfosController@create'
+        ]);
+
+        Route::post('/store', [
+            'as' => 'admin.loading.store',
+            'middleware' => 'admin',
+            'uses' => 'LoadingInfosController@store'
+        ]);
+
+        Route::get('/view-all', [
+            'as' => 'admin.loading.index',
+            'middleware' => 'admin',
+            'uses' => 'LoadingInfosController@index'
+        ]);
+
+        Route::get('/view/{num}', [
+            'as' => 'admin.loading.view',
+            'middleware' => 'admin',
+            'uses' => 'LoadingInfosController@view'
+        ]);
     });
 
 });
@@ -108,6 +146,32 @@ Route::auth();
 Route::get('/home', ['as' => 'user.home', 'uses' => 'HomeController@index', 'middleware' => 'auth']);
 
 Route::group(['prefix'=>'order'], function() {
+
+
+    Route::get('/receive', [
+        'as' => 'order.receive',
+        'middleware' => ['auth'],
+        'uses' => 'OrdersController@receive'
+    ]);
+
+    Route::get('/receive-item/{num}', [
+        'as' => 'order.receive_item',
+        'middleware' => ['auth'],
+        'uses' => 'OrdersController@receive_item'
+    ]);
+
+    Route::get('/dispatch', [
+        'as' => 'order.dispatch',
+        'middleware' => ['auth'],
+        'uses' => 'OrdersController@dispatch_orders'
+    ]);
+
+    Route::get('/dispatch-item/{num}', [
+        'as' => 'order.process',
+        'middleware' => ['auth'],
+        'uses' => 'OrdersController@process'
+    ]);
+
     Route::get('/process/{num}', [
         'as' => 'order.process',
         'middleware' => ['auth'],
@@ -132,5 +196,22 @@ Route::group(['prefix'=>'order'], function() {
         'uses' => 'OrdersController@stock_search_result'
     ]);
 
-    
+    Route::get('/make-paid/{num}', [
+        'as' => 'order.make_paid',
+        'middleware' => ['auth'],
+        'uses' => 'OrdersController@make_paid'
+    ]);
+
+    Route::post('/post-paid', [
+        'as' => 'order.post_paid',
+        'middleware' => ['auth'],
+        'uses' => 'OrdersController@post_paid'
+    ]);
+
+    Route::get('/view/{num}', [
+        'as' => 'order.user_view',
+        'middleware' => ['auth'],
+        'uses' => 'OrdersController@user_view'
+    ]);
+        
 });

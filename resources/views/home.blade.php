@@ -4,8 +4,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
+
+            <a class="btn btn-primary btn-lg active" href="#"><span class="glyphicon glyphicon-arrow-down"></span>Receive Parcel</a>
+            <a class="btn btn-primary btn-lg active" href="#"><span class="glyphicon glyphicon-arrow-up"></span>Dispatch Parcel</a>
+
             <div class="panel panel-default">
-                <div class="panel-heading">View Orders</div>
+                <div class="panel-heading">View Latest Orders</div>
                     @if(count($orders))
                     <table class="table">
                         <thead>
@@ -19,7 +23,9 @@
                                 <td> No of packages </td>
                                 <td> Weight </td>
                                 <td> Consignee </td>
+                                <td> Pay </td>
                                 <td> Action </td>
+
                             </tr>
                         </thead>
 
@@ -35,6 +41,7 @@
                                 <td> {{ $v->no_of_packages }} </td>
                                 <td> {{ $v->weight }} </td>
                                 <td> {{ $v->consignee }} </td>
+                                <td> {{ $v->paid }} <br>@if($v->paid == 'no') <a href="{{ route('order.make_paid', $v->id) }}"> Pay </a> @endif </td>
                                 <td> @if(!$v->processed)<a href="{{ route('order.process', $v->id) }} ">Dispatch</a>@else Dispatched @endif</td>
                             </tr>
                             @endforeach

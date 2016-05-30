@@ -14,6 +14,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
+            
             $table->string('c_number');
             $table->date('date');
             $table->integer('from');
@@ -27,7 +28,12 @@ class CreateOrdersTable extends Migration
             $table->decimal('grand_total', 10,2);
             $table->string('consignee');
             $table->string('paid');
+            
+            $table->tinyInteger('received')->default(0);
+            $table->date('receive_date')->nullable();
+
             $table->tinyInteger('processed')->default(0);
+            $table->date('process_date')->nullable();
             $table->timestamps();
         });
     }
