@@ -42,8 +42,6 @@
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-btn fa-sign-in"></i>Login
                                 </button>
-
-                                
                             </div>
                         </div>
                     </form>

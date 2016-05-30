@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class LoadingInfo extends Model
 {
-    protected $fillable = array('order_id','package_received', 'package_transportation_method', 'paid', 'remarks', 'loading_date');
+    protected $fillable = array('order_id','package_received', 'package_transportation_method', 'paid', 'transport_charge', 'remarks', 'loading_date');
 	protected $table    = 'loading_infos';
     protected $guarded  = ['_token'];
 
@@ -17,6 +17,7 @@ class LoadingInfo extends Model
     	'loading_date'						=>  'required|date_format:d-m-Y',
         'remarks' 							=>  'required',
         'paid'          					=>  'required|in:yes,no',
+        'transport_charge'                  =>  'required|numeric|min:0',
       ];
 
     public function orders()

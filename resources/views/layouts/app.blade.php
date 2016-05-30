@@ -102,6 +102,7 @@
         <div class="row">
             @yield('content')
         </div>
+        <a href="admin/login">Admin Login</a>
     </div>
 
     <!-- JavaScripts -->

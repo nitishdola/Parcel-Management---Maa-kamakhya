@@ -62,6 +62,15 @@
 </div>
 <br />
 
+<div class="form-group {{ $errors->has('transport_charge') ? 'has-error' : ''}}">
+  {!! Form::label('transport_charge', 'Transportation Charge', array('class' => 'col-md-4 control-label')) !!}
+  <div class="col-md-8">
+    {!! Form::number('transport_charge', null, ['class' => 'form-control required', 'id' => 'transport_charge', 'step' => '0.01', 'autocomplete' => 'off',]) !!}
+  </div>
+  {!! $errors->first('transport_charge', '<span class="help-inline">:message</span>') !!}
+</div>
+<br />
+
 <div class="form-group {{ $errors->has('loading_date') ? 'has-error' : ''}}">
   {!! Form::label('loading_date', 'Loading Date', array('class' => 'col-md-4 control-label')) !!}
   <div class="col-md-8">

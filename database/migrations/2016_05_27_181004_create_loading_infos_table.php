@@ -18,9 +18,10 @@ class CreateLoadingInfosTable extends Migration
             $table->enum('package_received', ['yes', 'no'])->default('no');
             $table->string('package_transportation_method', 50)->comment('Package transportation method from Patna. Truck/Bus');
             $table->enum('paid', ['yes', 'no'])->default('no')->comment('Whether paid for Package transportation from Patna');
+            $table->decimal('transport_charge', 10,2);
             $table->string('remarks', 500);
             $table->date('loading_date');
-            $table->timestamps();
+            $table->timestamps(); 
         });
     }
 
